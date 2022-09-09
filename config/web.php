@@ -1,10 +1,12 @@
 <?php
 
+use Codeception\Step\Action;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'to-do',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -42,14 +44,19 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/home' => 'site/index',
+                '/about' => 'site/about',
+                '/login' => 'site/login',
+                '/todo' => 'site/todo',
+                '<action>' => '/site/<action>'
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

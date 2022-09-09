@@ -41,7 +41,6 @@ $base_url = Yii::getAlias("@web");
                   <td><?= $todo->title ?></td>
                   <td style="text-align:right">
                     <a href="<?= Url::to(['site/changebtn', 'id' => $todo->id, 'status' => $todo->status]) ?>" class="btn btn-outline-warning btn-sm"><?= $todo->status == 1 ? 'Done' : 'Not Done' ?>
-
                     </a>
                     <?php
                     echo Html::a('Remove', ['delete', 'id' => $todo->id], ['class' => 'btn btn-outline-warning btn-sm'])
@@ -59,14 +58,13 @@ $base_url = Yii::getAlias("@web");
                 $count = Todo::find()->count();
                 echo $count . 'To-Do Item.';
                 ?>
-
               </div>
               <div class="col-lg-6" style="text-align: right;">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-secondary active">
                     <a href="<?= Url::to(['site/todo', 'show' => 'all']) ?>" class="btn btn-sm">All</a>
                   </label>
-                  <label class="btn btn-secondary">
+                  <label class="btn btn-secondary ">
                     <a href="<?= Url::to(['site/todo', 'show' => 'done']) ?>" class="btn btn-sm">Done</a>
                   </label>
                   <label class="btn btn-secondary">

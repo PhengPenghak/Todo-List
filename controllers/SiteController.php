@@ -134,7 +134,7 @@ class SiteController extends Controller
     {
 
         $model = new Todo();
-        // $todo = Todo::find()->all();
+        $todo = Todo::find()->all();
 
         if ($this->request->ispost && $model->load($this->request->post())) {
 
@@ -142,7 +142,6 @@ class SiteController extends Controller
             $model->save();
             return $this->redirect(Yii::$app->request->referrer);
         }
-
 
         switch ($show) {
             case 'all':
@@ -167,9 +166,7 @@ class SiteController extends Controller
     public function actionDelete($id)
     {
         $data = Todo::findOne($id);
-
         $data->delete();
-
         return $this->redirect(['todo']);
     }
     public function actionChangebtn($id, $status)
