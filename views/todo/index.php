@@ -23,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ]); ?>
 
 <div class="todo-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <p>
+        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-success triggerModal ">Add Todo</button>
+    </p>
     <?php
     Modal::begin([
         'title' => 'Create Todo',
@@ -32,10 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
     echo "<div id='modalContent'></div>";
     Modal::end();
     ?>
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Create Todo', ['create'], ['class' => 'btn btn-success triggerModal']) ?>
-    </p>
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
     ?>
 

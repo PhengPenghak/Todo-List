@@ -98,7 +98,7 @@ class TodoController extends Controller
         }
 
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
             'todo' => $todo,
 
