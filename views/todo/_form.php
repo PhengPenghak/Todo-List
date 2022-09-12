@@ -10,13 +10,13 @@ use yii\widgets\ActiveForm;
 
 
 
-<div class="todo-form ">
+<div class="todo-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo']) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
-    <div class="form-group text-left">
+    <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success ']) ?>
     </div>
 

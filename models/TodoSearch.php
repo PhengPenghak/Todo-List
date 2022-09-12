@@ -15,11 +15,12 @@ class TodoSearch extends Todo
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id', 'status'], 'integer'],
-            [['title'], 'safe'],
+            [['title', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -75,7 +76,8 @@ class TodoSearch extends Todo
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->orFilterWhere(['like', 'title', $this->globalSearch])
+            ->orFilterWhere(['like', 'status', $this->globalSearch]);
 
         return $dataProvider;
     }
