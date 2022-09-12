@@ -14,17 +14,12 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-    <?= $form->field($model, 'title') ?>
-    <?= $form->field($model, 'status') ?>
+    <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control form-control-navbar', 'placeholder' => 'Search Product ...'])->label() ?>
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>
 <?php
 $script = <<<JS

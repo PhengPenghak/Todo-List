@@ -26,13 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-success triggerModal ">Add Todo</button>
+        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-success triggerModal flex-md-3">Add Todo</button>
     </p>
+
+
     <?php
     Modal::begin([
         'title' => 'Create Todo',
         'id' => 'modal',
-        'size' => 'modal-lg',
+        'size' => 'modal-md',
     ]);
     echo "<div id='modalContent'></div>";
     Modal::end();

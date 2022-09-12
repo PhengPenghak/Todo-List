@@ -11,6 +11,7 @@ use Yii;
  * @property string|null $title
  * @property int|null $status
  */
+
 class Todo extends \yii\db\ActiveRecord
 {
     /**
@@ -27,8 +28,11 @@ class Todo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title'], 'required'],
             [['status'], 'integer'],
+            [[ 'globalSearch'], 'safe'],
             [['title',], 'string', 'max' => 255],
+
         ];
     }
 
