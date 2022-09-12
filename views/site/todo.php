@@ -41,10 +41,18 @@ $base_url = Yii::getAlias("@web");
                   <td><?= $todo->title ?></td>
                   <td style="text-align:right">
                     <a href="<?= Url::to(['site/changebtn', 'id' => $todo->id, 'status' => $todo->status]) ?>" class="btn btn-outline-warning btn-sm"><?= $todo->status == 1 ? 'Done' : 'Not Done' ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
                     </a>
                     <?php
                     echo Html::a('Remove', ['delete', 'id' => $todo->id], ['class' => 'btn btn-outline-warning btn-sm'])
                     ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
                   </td>
                 </tr>
               </tbody>
@@ -57,13 +65,21 @@ $base_url = Yii::getAlias("@web");
                 $count = Todo::find()->count();
                 echo $count . 'To-Do Item.';
                 ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
               </div>
               <div class="col-lg-6" style="text-align: right;">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-secondary active">
                     <a href="<?= Url::to(['site/todo', 'show' => 'all']) ?>" class="btn btn-sm">All</a>
                   </label>
+<<<<<<< HEAD
                   <label class="btn btn-secondary ">
+=======
+                  <label class="btn btn-secondary">
+>>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
                     <a href="<?= Url::to(['site/todo', 'show' => 'done']) ?>" class="btn btn-sm">Done</a>
                   </label>
                   <label class="btn btn-secondary">
@@ -79,4 +95,33 @@ $base_url = Yii::getAlias("@web");
     </div>
   </div>
   </div>
+<<<<<<< HEAD
 </section>
+=======
+</section>
+<?php
+$script = <<<JS
+$('.btn-remove-item').on('click', function(e){
+    e.preventDefault();
+    var id = $(this).closest('.btn-remove-item').data('id');
+    $.ajax({
+        url: "$base_url"+"/site/todo",
+        method: 'POST',
+        data: {
+            id: id,
+            action: "todo"
+        },
+        success: function(res){
+            var data = JSON.parse(res);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
+});
+
+JS;
+$this->registerJs($script);
+
+?>
+>>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
