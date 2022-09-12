@@ -45,7 +45,6 @@ $base_url = Yii::getAlias("@web");
                     <?php
                     echo Html::a('Remove', ['delete', 'id' => $todo->id], ['class' => 'btn btn-outline-warning btn-sm'])
                     ?>
-
                   </td>
                 </tr>
               </tbody>
@@ -81,28 +80,3 @@ $base_url = Yii::getAlias("@web");
   </div>
   </div>
 </section>
-<?php
-$script = <<<JS
-$('.btn-remove-item').on('click', function(e){
-    e.preventDefault();
-    var id = $(this).closest('.btn-remove-item').data('id');
-    $.ajax({
-        url: "$base_url"+"/site/todo",
-        method: 'POST',
-        data: {
-            id: id,
-            action: "todo"
-        },
-        success: function(res){
-            var data = JSON.parse(res);
-        },
-        error: function(err){
-            console.log(err);
-        }
-    });
-});
-
-JS;
-$this->registerJs($script);
-
-?>
