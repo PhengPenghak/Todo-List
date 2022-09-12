@@ -1,19 +1,12 @@
 <?php
 
-<<<<<<< HEAD
 use Codeception\Step\Action;
 
-=======
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-<<<<<<< HEAD
     'id' => 'to-do',
-=======
-    'id' => 'basic',
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -51,16 +44,10 @@ $config = [
             ],
         ],
         'db' => $db,
-<<<<<<< HEAD
-
-=======
-        /*
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-<<<<<<< HEAD
                 '/home' => 'site/index',
                 '/about' => 'site/about',
                 '/login' => 'site/login',
@@ -69,11 +56,6 @@ $config = [
             ],
         ],
 
-=======
-            ],
-        ],
-        */
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
     ],
     'params' => $params,
 ];

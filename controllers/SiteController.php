@@ -134,11 +134,7 @@ class SiteController extends Controller
     {
 
         $model = new Todo();
-<<<<<<< HEAD
         $todo = Todo::find()->all();
-=======
-        // $todo = Todo::find()->all();
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
 
         if ($this->request->ispost && $model->load($this->request->post())) {
 
@@ -147,10 +143,6 @@ class SiteController extends Controller
             return $this->redirect(Yii::$app->request->referrer);
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
         switch ($show) {
             case 'all':
                 $todo = Todo::find()->all();
@@ -174,13 +166,7 @@ class SiteController extends Controller
     public function actionDelete($id)
     {
         $data = Todo::findOne($id);
-<<<<<<< HEAD
         $data->delete();
-=======
-
-        $data->delete();
-
->>>>>>> ce57403775cd5ef909d652d1104501a977a40f90
         return $this->redirect(['todo']);
     }
     public function actionChangebtn($id, $status)
