@@ -65,14 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{remove}',
-                'buttons' => [
-                    'remove' => function ($url, $model) {
-                        return Html::a('Remove', $url, ['id' => $model->id], ['class' => 'btn btn-outline-warning']);
-                    }
-                ],
-                'header' => 'action',
+                'class' => ActionColumn::class,
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }, 'header' => 'action',
             ],
         ],
 

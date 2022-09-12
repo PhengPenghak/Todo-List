@@ -28,7 +28,7 @@ class Todo extends \yii\db\ActiveRecord
     {
         return [
             [['status'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['title',], 'string', 'max' => 255],
         ];
     }
 

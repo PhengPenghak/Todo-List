@@ -88,12 +88,11 @@ class TodoController extends Controller
         // exit;
         if ($this->request->isPost) {
             if ($this->request->ispost && $model->load($this->request->post())) {
-
+                
                 $model->status = 0;
                 $model->save();
                 return $this->redirect(Yii::$app->request->referrer);
             }
-
         } else {
             $model->loadDefaultValues();
         }
