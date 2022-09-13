@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'update' => function ($url, $model) {
                         return Html::a('Update <i class="fas fa-pen"></i>', "#", [
                             'class' => 'btn btn-outline-info btn-sm btn-xs triggerModal',
-                            'value' => Url::to('todo/update'),
+                            'value' => Url::to(['todo/update', 'id' => $model->id]),
                         ]);
                     },
 

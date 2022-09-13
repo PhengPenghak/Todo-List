@@ -28,10 +28,8 @@ use yii\helpers\Url;
         </div>
         <div class="col-lg-4">
             <div class="input-group mb-3">
-                <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control form-control-navbar ', 'placeholder' => 'Search Todo.........'])->label(false) ?>
-                <div class="input-group-prepend">
-                    <?= Html::submitButton('Search', ['class' => 'btn btn-dark']) ?>
-                </div>
+                <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control ', 'placeholder' => 'Search Todo.........'])->label(false) ?>
+                <?= Html::submitButton('Search', ['class' => 'btn btn-dark']) ?>
             </div>
         </div>
     </div>
