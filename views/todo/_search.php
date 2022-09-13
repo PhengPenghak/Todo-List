@@ -21,16 +21,16 @@ use yii\helpers\Url;
             <div class="input-group input-group-sm mb-3">
                 <div style="width: 70%;">
                     <p class="float-right">
-                        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-success triggerModal ">Add Product</button>
+                        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-outline-dark btn-sm btn-xs triggerModal ">Add Todo-List</button>
                     </p>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="input-group mb-3">
-                <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control form-control-navbar', 'placeholder' => 'Search Todo.........'])->label(false) ?>
+                <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control form-control-navbar ', 'placeholder' => 'Search Todo.........'])->label(false) ?>
                 <div class="input-group-prepend">
-                    <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Search', ['class' => 'btn btn-dark']) ?>
                 </div>
             </div>
         </div>

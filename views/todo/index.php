@@ -56,9 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function ($model) {
                     if ($model->status == 1) {
-                        return Html::a('Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-info']);
+                        return Html::a('Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-info btn-sm btn-xs']);
                     } else {
-                        return Html::a('Not Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-warning']);
+                        return Html::a('Not Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-warning btn-sm btn-xs']);
                     }
                 }
             ],
@@ -69,19 +69,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
             [
-                'class' => ActionColumn::class,
-                'urlCreator' => function ($action, $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }, 'header' => 'action',
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Action',
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a('View <i class="fas fa-eye"></i>', $url, ['class' => 'btn btn-outline-secondary btn-sm btn-xs ']);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a('Update <i class="fas fa-pen"></i>', "#", [
+                            'class' => 'btn btn-outline-info btn-sm btn-xs triggerModal',
+                            'value' => Url::to('todo/update'),
+                        ]);
+                    },
+
+                    'delete' => function ($url, $model) {
+                        return Html::a('Delete <i class="fas fa-trash"></i>', $url, [
+                            'title' => Yii::t('app', 'Delete'),
+                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete?'),
+                            'data-method' => 'post', 'data-pjax' => '0',
+                            'class' => 'btn btn-outline-dark btn-sm btn-xs'
+                        ]);
+                    }
+                ],
             ],
         ],
-
-
-
-
     ]); ?>
-
-
     <label>
         <a href="<?= Url::to(['todo/index',]) ?>" class="btn btn-sm">All</a>
     </label>
@@ -89,19 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <a href="<?= Url::to(['todo/index', 'status' => 1]) ?>" class="btn btn-sm">Done</a>
     </label>
     <label>
-        <a href="<?= Url::to(['todo/index', 'status' => 0]) ?>" class="btn btn-sm">Not Done</a>
+        <a href="<?= Url::to(['todo/index', 'status' => 0]) ?>" class="btn btn-sm ">Not Done</a>
     </label>
 
 </div>
-<?php
-$script = <<<JS
-    $(".triggerModal").click(function () {
-        $("#modal")
-        .modal("show")
-        .find("#modalContent")
-        .load($(this).attr("value"));   
-       
-    });
-JS;
-$this->registerJs($script);
-?>
