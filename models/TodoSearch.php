@@ -20,7 +20,7 @@ class TodoSearch extends Todo
     {
         return [
             [['id', 'status'], 'integer'],
-            [['title', 'globalSearch'], 'safe'],
+            [['title', 'globalSearch', 'create_at'], 'safe'],
         ];
     }
 
@@ -57,7 +57,6 @@ class TodoSearch extends Todo
             // $query->where('0=1');
             return $dataProvider;
         }
-
         if (key_exists('status', $params)) {
             //if (isset($_GET['status'])) {
             //if (Yii::$app->request->get('status')) {
@@ -68,16 +67,18 @@ class TodoSearch extends Todo
             //} else {
             //echo "have not key status";
         }
-
         //exit;
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'title' => $this->title,
+            'status' => $this->status,
+            'create_at' => $this->create_at,
         ]);
 
         $query->orFilterWhere(['like', 'title', $this->globalSearch])
-            ->orFilterWhere(['like', 'status', $this->globalSearch]);
+            ->orFilterWhere(['like', 'status', $this->globalSearch])
+            ->orFilterWhere(['like', 'create_ad', $this->globalSearch]);
 
         return $dataProvider;
     }

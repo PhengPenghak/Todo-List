@@ -25,11 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="todo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-success triggerModal flex-md-3">Add Todo</button>
-    </p>
-
-
     <?php
     Modal::begin([
         'title' => 'Create Todo',
@@ -39,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     echo "<div id='modalContent'></div>";
     Modal::end();
     ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    <?php echo $this->render('_search', ['model' => $searchModel]);
     ?>
 
     <?= GridView::widget([
@@ -66,6 +61,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a('Not Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-warning']);
                     }
                 }
+            ],
+            [
+                'attribute' => 'create_at',
+                'format' => 'datetime',
+                'contentOptions' => ['style' => 'white-space:nowrap'],
+
             ],
             [
                 'class' => ActionColumn::class,
