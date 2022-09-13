@@ -78,7 +78,7 @@ class TodoSearch extends Todo
 
         $query->orFilterWhere(['like', 'title', $this->globalSearch])
             ->orFilterWhere(['like', 'status', $this->globalSearch])
-            ->orFilterWhere(['like', 'create_ad', $this->globalSearch]);
+            ->orFilterWhere(['like', 'create_at', $this->globalSearch]);
 
         return $dataProvider;
     }
