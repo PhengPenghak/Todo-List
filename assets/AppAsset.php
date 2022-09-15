@@ -22,9 +22,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css',
+        'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css',
         'css/site.css',
     ];
-    public $js = [];
+    public $js = [
+        'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js',
+        'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
+        'https://cdn.jsdelivr.net/jquery/latest/jquery.min.js',
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset'
