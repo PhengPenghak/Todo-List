@@ -16,6 +16,7 @@ class m220912_030837_create_todo_table extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull(),
             'status' => $this->boolean(),
+            'date' => $this->date(),
             'create_at' => $this->timestamp()
         ]);
     }

@@ -20,7 +20,7 @@ class TodoSearch extends Todo
     {
         return [
             [['id', 'status'], 'integer'],
-            [['title', 'globalSearch', 'create_at'], 'safe'],
+            [['title', 'globalSearch', 'create_at', 'date', 'from_date', 'to_date'], 'safe'],
         ];
     }
 
@@ -74,10 +74,12 @@ class TodoSearch extends Todo
             'title' => $this->title,
             'status' => $this->status,
             'create_at' => $this->create_at,
+
         ]);
 
         $query->orFilterWhere(['like', 'title', $this->globalSearch])
             ->orFilterWhere(['like', 'status', $this->globalSearch])
+            ->orFilterWhere(['like', 'date', $this->globalSearch])
             ->orFilterWhere(['like', 'create_at', $this->globalSearch]);
 
         return $dataProvider;

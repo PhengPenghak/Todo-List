@@ -45,6 +45,7 @@ class Todo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'status' => 'Status',
+            
         ];
     }
 }
