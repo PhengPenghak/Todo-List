@@ -26,6 +26,54 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="todo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <div class="row my-5">
+        <div class="col-3">
+            <div class="card border-success">
+                <div class="card-body">
+                    <h5 class="card-title">Previous month tasks </h5>
+                    <h1>25</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card border-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Previous week tasks </h5>
+                    <h1>5</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-secondary">
+                <div class="card-body">
+                    <small class="float-end text-muted">Query task result</small>
+                    <div class="clearfix"></div>
+                    <h1>10 <span class="ml-2 fs-5">All</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <small class="float-end text-muted">Query task result</small>
+                    <div class="clearfix"></div>
+                    <h1>5 <span class="ml-2 fs-5">Done</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-warning">
+                <div class="card-body">
+                    <small class="float-end text-muted">Query task result</small>
+                    <div class="clearfix"></div>
+                    <h1>5 <span class="ml-2 fs-5">Not done</span></h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <?php
     Modal::begin([
         'title' => 'Create Todo',
