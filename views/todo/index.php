@@ -3,6 +3,7 @@
 use app\models\Todo;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\ButtonGroup;
+use yii\bootstrap5\LinkPager;
 use yii\bootstrap5\Modal;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -43,6 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'tableOptions' => [
             'class' => 'table table-hover',
         ],
+        // 'pager' => [
+        //     'firstPageLabel' => 'First',
+        //     'lastPageLabel' => 'Last',
+        //     'class' => LinkPager::class,
+        // ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

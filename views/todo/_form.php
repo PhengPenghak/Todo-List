@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
     <div class="form-group p-2">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success ']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-dark ']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

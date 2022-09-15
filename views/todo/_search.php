@@ -29,7 +29,7 @@ use yii\helpers\Url;
         <div class="col-lg-4">
             <div class="input-group mb-3">
                 <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control ', 'placeholder' => 'Search Todo.........'])->label(false) ?>
-                <?= Html::submitButton('Search', ['class' => 'btn btn-dark']) ?>
+                <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-dark']) ?>
             </div>
         </div>
     </div>

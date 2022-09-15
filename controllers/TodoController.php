@@ -42,6 +42,8 @@ class TodoController extends Controller
 
         $searchModel = new TodoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        // $dataProvider->setPagination(['pageSize' => 2]);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
