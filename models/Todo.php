@@ -8,10 +8,11 @@ use Yii;
  * This is the model class for table "todo".
  *
  * @property int $id
- * @property string|null $title
+ * @property string $title
  * @property int|null $status
+ * @property string|null $create_at
+ * @property string|null $date
  */
-
 class Todo extends \yii\db\ActiveRecord
 {
     /**
@@ -30,9 +31,8 @@ class Todo extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['status'], 'integer'],
-            [[ 'globalSearch'], 'safe'],
-            [['title',], 'string', 'max' => 255],
-
+            [['create_at', 'date'], 'safe'],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,7 +45,8 @@ class Todo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'status' => 'Status',
-            
+            'create_at' => 'Create At',
+            'date' => 'Date',
         ];
     }
 }

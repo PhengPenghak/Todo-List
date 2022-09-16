@@ -45,9 +45,6 @@ $script = <<<JS
        
     });
     
-    $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
 JS;
 $this->registerJs($script);
 ?>

@@ -82,8 +82,6 @@ class TodoController extends Controller
      */
     public function actionCreate()
     {
-
-
         $model = new Todo();
         $todo = Todo::find()->all();
         $request = Yii::$app->request;
@@ -93,6 +91,7 @@ class TodoController extends Controller
         if ($this->request->isPost) {
             if ($this->request->ispost && $model->load($this->request->post())) {
                 $model->create_at = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                $model->date();
                 $model->status = 0;
                 $model->save();
                 return $this->redirect(['index']);
@@ -100,8 +99,6 @@ class TodoController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-
-
         return $this->renderAjax('create', [
             'model' => $model,
             'todo' => $todo,

@@ -116,10 +116,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             ],
+            // [
+            //     'attribute' => 'create_at',
+            //     'format' => 'datetime',
+            //     'contentOptions' => ['style' => 'white-space:nowrap'],
+
+            // ],
             [
-                'attribute' => 'create_at',
+                'attribute' => 'date',
                 'format' => 'datetime',
-                'contentOptions' => ['style' => 'white-space:nowrap'],
 
             ],
             [
