@@ -14,9 +14,9 @@ use keygenqt\datePicker\DatePicker;
 <div class="todo-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <form action="/action_page.php">
-        <label for="birthday">DATE:</label>
-        <input type="date" id="birthday" name="birthday">
+    <form action="">
+        <label for="date">DATE:</label>
+        <input type="date" id="date" name="date">
         <?= $form->field($model, 'date')->hiddenInput()->label(false) ?>
     </form>
 
