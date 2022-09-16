@@ -21,14 +21,14 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        //     // '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css',
+        //     // '/resources/demos/style.css',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css',
-        'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css',
-        'css/site.css',
-    ];
-    public $js = [
-        'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js',
-        'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js',
-        'https://cdn.jsdelivr.net/jquery/latest/jquery.min.js',
+        //     'css/site.css',
+        // ];
+        // public $js = [
+        //     'https://code.jquery.com/jquery-3.6.0.js',
+        //     '//code.jquery.com/ui/1.13.2/jquery-ui.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
