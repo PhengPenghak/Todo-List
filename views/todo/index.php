@@ -49,7 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <small class="float-end text-muted">Query task result</small>
                     <div class="clearfix"></div>
-                    <h1>10 <span class="ml-2 fs-5">All</span></h1>
+                    <h1> <?php
+                            $count = Todo::find()->count();
+                            echo $count;
+                            ?>
+                        <span class="ml-2 fs-5">All</span>
+                    </h1>
                 </div>
             </div>
         </div>
@@ -58,7 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <small class="float-end text-muted">Query task result</small>
                     <div class="clearfix"></div>
-                    <h1>5 <span class="ml-2 fs-5">Done</span></h1>
+                    <h1><?php
+                        $status[1] = "Done";
+                        echo count($status);
+                        ?> <span class="ml-2 fs-5">Done</span></h1>
                 </div>
             </div>
         </div>

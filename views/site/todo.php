@@ -52,7 +52,7 @@ $base_url = Yii::getAlias("@web");
           </table>
           <div class="container">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-6  ">
                 <?php
                 $count = Todo::find()->count();
                 echo $count . 'To-Do Item.';

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use keygenqt\datePicker\DatePicker;
+use yii\jui\DatePicker;
 
 /** @var yii\web\View $this */
 /** @var app\models\Todo $model */
@@ -14,12 +14,10 @@ use keygenqt\datePicker\DatePicker;
 <div class="todo-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <form action="">
-        <label for="date">DATE:</label>
-        <input type="date" id="date" name="date">
-        <?= $form->field($model, 'date')->hiddenInput()->label(false) ?>
-    </form>
-
+    <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
+        'language' => 'en',
+        'dateFormat' => 'yyyy-MM-dd',
+    ]) ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
     <div class="form-group p-2">

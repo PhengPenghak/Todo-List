@@ -91,7 +91,6 @@ class TodoController extends Controller
         if ($this->request->isPost) {
             if ($this->request->ispost && $model->load($this->request->post())) {
                 $model->create_at = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
-                $model->date();
                 $model->status = 0;
                 $model->save();
                 return $this->redirect(['index']);
