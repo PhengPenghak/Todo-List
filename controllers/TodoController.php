@@ -45,15 +45,42 @@ class TodoController extends Controller
         $model = new Todo();
         $searchModel = new TodoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        switch ($datetype) {
+            case '$this_month':
+                $from_date = date("Y-m-d", strtotime("first day of month"));
+                $to_date = date("Y-m-d", strtotime("last day of last month"));
+                break;
+            case 'previous_month':
+                $from_date = date("Y-m-d", strtotime("first day of last month"));
+                $to_date = date("Y-m-d", strtotime("last day of last month"));
+                break;
+            case 'last_three_month':
+                $from_date = date("Y-m-d", strtotime("first day of -3 month"));
+                $to_date = date("Y-m-d", strtotime("last day of -3 month"));
+                break;
+            default:
+                $from_date = date("Y-m-d", strtotime("first day of this month"));
+                $to_date = date("Y-m-d", strtotime("last day of this month"));
+                break;
+        }
+        $drowdown = [
+            'tihs_month' => 'This month',
+            'previous_month' => 'Previous_month',
+            'last_three_month' => 'Last 3 month',
+        ];
+        $datatype = Todo::find()
+            ->where(['BETWEEN', 'DATE(date)']);
 
         $lastMonthFrom = date("Y-m-d", strtotime("first day of previous month"));
         $lastMonthTo = date("Y-m-d", strtotime("last day of previous month"));
         $totalLastMonth = Todo::find()
             ->where(['BETWEEN', 'DATE(date)',   $lastMonthFrom, $lastMonthTo])
             ->count();
-        // echo $lastMonthFrom;
-        // exit;
-        $drowdown = ArrayHelper::map(todo::find()->all(), 'id', 'date');
+
+        $countByDateType = Todo::find()
+            ->where(['BETWEEN', 'DATE(date)',   $from_date, $to_date])
+            ->count();
+
         $lastWeekFrom = date("Y-m-d", strtotime("last week monday"));
         $lastWeekTo = date("Y-m-d", strtotime("last week sunday"));
         $totalLastWeek = Todo::find()
@@ -78,7 +105,8 @@ class TodoController extends Controller
             'totalTodos' => $totalTodos,
             'totalDoneTodos' => $totalDoneTodos,
             'totalNotDoneTodos' => $totalNotDoneTodos,
-            'totalLastMonth' => $totalLastMonth,
+            'countByDateType' => $countByDateType,
+            'datetype' => $datetype,
             'drowdown' =>  $drowdown,
             'model' => $model
         ]);

@@ -1,5 +1,6 @@
 <?php
 
+use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
@@ -15,10 +16,12 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
-        'language' => 'en',
-        'dateFormat' => 'MM-dd-yyyy',
-    ]) ?>
+    <?= $form->field($model, 'date')->widget(DateTimePicker::class, [
+        'options' => ['placeholder' => 'Enter event time ...'],
+        'pluginOptions' => [
+            'autoclose' => true
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
