@@ -3,7 +3,6 @@
 use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
 
 /** @var yii\web\View $this */
 /** @var app\models\Todo $model */
