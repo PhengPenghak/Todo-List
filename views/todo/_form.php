@@ -14,10 +14,12 @@ use yii\jui\DatePicker;
 <div class="todo-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
     <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
         'language' => 'en',
-        'dateFormat' => 'yyyy-MM-dd',
+        'dateFormat' => 'MM-dd-yyyy',
     ]) ?>
+
     <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
     <div class="form-group p-2">

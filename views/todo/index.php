@@ -9,6 +9,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\base\Theme;
+use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\TodoSearch $searchModel */
@@ -32,7 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card border-success">
                 <div class="card-body">
                     <h5 class="card-title">Previous month tasks </h5>
-                    <h1>25</h1>
+                    <?= $form->field($model, 'date')->dropDownList(
+                        $drowdown,
+                        ['prompt' => 'Select Month', 'class' => 'form-control isSelect2']
+                    );
+                    ?>
+                    <h1><?= $totalLastMonth ?></h1>
                 </div>
             </div>
         </div>
@@ -40,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card border-danger">
                 <div class="card-body">
                     <h5 class="card-title">Previous week tasks </h5>
-                    <h1>5</h1>
+                    <h1><?= $totalLastWeek ?></h1>
                 </div>
             </div>
         </div>
@@ -49,10 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <small class="float-end text-muted">Query task result</small>
                     <div class="clearfix"></div>
-                    <h1> <?php
-                            $count = Todo::find()->count();
-                            echo $count;
-                            ?>
+                    <h1> <?= $totalTodos ?>
                         <span class="ml-2 fs-5">All</span>
                     </h1>
                 </div>
@@ -63,10 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <small class="float-end text-muted">Query task result</small>
                     <div class="clearfix"></div>
-                    <h1><?php
-                        $status[1] = "Done";
-                        echo count($status);
-                        ?> <span class="ml-2 fs-5">Done</span></h1>
+                    <h1><?= $totalDoneTodos ?> <span class="ml-2 fs-5">Done</span></h1>
                 </div>
             </div>
         </div>
@@ -75,7 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <small class="float-end text-muted">Query task result</small>
                     <div class="clearfix"></div>
-                    <h1>5 <span class="ml-2 fs-5">Not done</span></h1>
+                    <h1><?= $totalNotDoneTodos ?> <span class="ml-2 fs-5">Not done</span></h1>
                 </div>
             </div>
         </div>

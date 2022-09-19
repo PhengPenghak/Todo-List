@@ -8,6 +8,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * TodoController implements the CRUD actions for Todo model.
@@ -37,17 +38,49 @@ class TodoController extends Controller
      *
      * @return string
      */
-    public function actionIndex($show = 'all')
+    public function actionIndex($show = 'all', $datetype = 'this_month')
     {
 
+        // $dataProvider->setPagination(['pageSize' => 2]);
+        $model = new Todo();
         $searchModel = new TodoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        // $dataProvider->setPagination(['pageSize' => 2]);
+
+        $lastMonthFrom = date("Y-m-d", strtotime("first day of previous month"));
+        $lastMonthTo = date("Y-m-d", strtotime("last day of previous month"));
+        $totalLastMonth = Todo::find()
+            ->where(['BETWEEN', 'DATE(date)',   $lastMonthFrom, $lastMonthTo])
+            ->count();
+        // echo $lastMonthFrom;
+        // exit;
+        $drowdown = ArrayHelper::map(todo::find()->all(), 'id', 'date');
+        $lastWeekFrom = date("Y-m-d", strtotime("last week monday"));
+        $lastWeekTo = date("Y-m-d", strtotime("last week sunday"));
+        $totalLastWeek = Todo::find()
+            ->where(['BETWEEN', 'DATE(date)', $lastWeekFrom, $lastWeekTo])
+            ->count();
+
+        $totalTodos = $dataProvider->getTotalCount();
+
+        $dataProvider_1 = $searchModel->search($this->request->queryParams);
+        $dataProvider_1->query->andWhere(['status' => 1]);
+        $totalDoneTodos = $dataProvider_1->getTotalCount();
+
+        $dataProvider_2 = $searchModel->search($this->request->queryParams);
+        $dataProvider_2->query->andWhere(['status' => 0]);
+        $totalNotDoneTodos = $dataProvider_2->getTotalCount();
 
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'totalLastWeek' => $totalLastWeek,
+            'totalTodos' => $totalTodos,
+            'totalDoneTodos' => $totalDoneTodos,
+            'totalNotDoneTodos' => $totalNotDoneTodos,
+            'totalLastMonth' => $totalLastMonth,
+            'drowdown' =>  $drowdown,
+            'model' => $model
         ]);
     }
     public function actionChangebtn($id, $status)
@@ -104,7 +137,6 @@ class TodoController extends Controller
 
         ]);
     }
-
     /**
      * Updates an existing Todo model.
      * If update is successful, the browser will be redirected to the 'view' page.
