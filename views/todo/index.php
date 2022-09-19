@@ -21,11 +21,6 @@ use kartik\select2\Select2;
 $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php $form = ActiveForm::begin([
-    'action' => ['todo'],
-    'method' => 'get',
-
-]); ?>
 
 <div class="todo-index">
 
@@ -35,13 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-3">
             <div class="card border-success">
                 <div class="card-body">
-                    <h5 class="card-title">Previous month tasks </h5>
-                    <?= $form->field($model, 'date')->dropDownList(
+                    <?= Html::dropDownList(
+                        'dateFilter',
+                        $datetype,
                         $drowdown,
-                        ['prompt' => 'Select Month', 'class' => 'form-control isSelect2']
-                    );
+                        ['class' => 'form-control isSelect2']
+                    )
                     ?>
-                    <h1><?= $totalLastMonth ?></h1>
+                    <h1><?= $countByDateType ?></h1>
                 </div>
             </div>
         </div>
@@ -176,3 +172,17 @@ $this->params['breadcrumbs'][] = $this->title;
     </label>
 
 </div>
+
+<?php
+$script = <<<JS
+    $("select[name='dateFilter']").change(function(){
+        var value = $(this).val();
+        // window.location.href += "?datetype="+value;
+        var url = new URL(window.location.href);
+        url.searchParams.set('datetype',value);
+        window.location.href = url.href;
+    });
+    
+JS;
+$this->registerJs($script);
+?>

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\jui\DatePicker;
 
 /** @var yii\web\View $this */
 /** @var app\models\Todo $model */
@@ -15,7 +14,7 @@ use yii\jui\DatePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
+    <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::class, [
         'language' => 'en',
         'dateFormat' => 'MM-dd-yyyy',
     ]) ?>
