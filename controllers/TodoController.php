@@ -41,10 +41,12 @@ class TodoController extends Controller
     public function actionIndex($show = 'all', $datetype = 'this_month')
     {
 
-        // $dataProvider->setPagination(['pageSize' => 2]);
         $model = new Todo();
         $searchModel = new TodoSearch();
+
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider->setPagination(['pageSize' => 5]);
+
         switch ($datetype) {
             case '$this_month':
                 $from_date = date("Y-m-d", strtotime("first day of month"));
@@ -70,45 +72,14 @@ class TodoController extends Controller
         ];
         $datatype = Todo::find()
             ->where(['BETWEEN', 'DATE(date)']);
-
-
-        switch ($datetype) {
-            case 'this_month':
-                $from_date = date("Y-m-d", strtotime("first day of this month"));
-                $to_date = date("Y-m-d", strtotime("last day of this month"));
-                break;
-            case 'previous_month':
-                $from_date = date("Y-m-d", strtotime("first day of last month"));
-                $to_date = date("Y-m-d", strtotime("last day of last month"));
-                break;
-            case 'last_three_month':
-                $from_date = date("Y-m-d", strtotime("first day of -3 month"));
-                $to_date = date("Y-m-d", strtotime("last day of -3 month"));
-                break;
-            default:
-                $from_date = date("Y-m-d", strtotime("first day of this month"));
-                $to_date = date("Y-m-d", strtotime("last day of this month"));
-                break;
-        }
+        $countByDateType = Todo::find()
+            ->where(['BETWEEN', 'DATE(date)',   $from_date, $to_date])
+            ->count();
 
         $countByDateType = Todo::find()
             ->where(['BETWEEN', 'DATE(date)',   $from_date, $to_date])
             ->count();
 
-<<<<<<< HEAD
-        $countByDateType = Todo::find()
-            ->where(['BETWEEN', 'DATE(date)',   $from_date, $to_date])
-            ->count();
-
-=======
-
-
-        $drowdown = [
-            'this_month' => 'This month',
-            'previous_month' => 'Previous month',
-            'last_three_month' => 'Last 3 month',
-        ];
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
         $lastWeekFrom = date("Y-m-d", strtotime("last week monday"));
         $lastWeekTo = date("Y-m-d", strtotime("last week sunday"));
         $totalLastWeek = Todo::find()

@@ -21,10 +21,6 @@ use kartik\select2\Select2;
 $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<<<<<<< HEAD
-
-=======
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
 
 <div class="todo-index">
 
@@ -34,10 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-3">
             <div class="card border-success">
                 <div class="card-body">
-<<<<<<< HEAD
                     <h5 class="card-title">Previous month tasks </h5>
-=======
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
                     <?= Html::dropDownList(
                         'dateFilter',
                         $datetype,
@@ -102,15 +95,41 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        // 'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'tableOptions' => [
             'class' => 'table table-hover',
         ],
-        // 'pager' => [
-        //     'firstPageLabel' => 'First',
-        //     'lastPageLabel' => 'Last',
-        //     'class' => LinkPager::class,
-        // ],
+
+        'pager' => [
+            'firstPageLabel' => 'First',
+            'lastPageLabel' => 'Last',
+            'class' => LinkPager::class,
+        ],
+        'layout' => '
+        {items}
+        <div class="row mb-3">
+            <div class="col">
+                {pager}
+            </div>
+            <div class="col">
+                {summary}
+            </div>
+            <div class="col">
+            <div class="d-flex justify-content-end button">
+            <label>
+                <a href="' . Url::to(['todo/index',]) . '" class="btn btn-sm">All</a>
+            </label>
+            <label>
+                <a href="' . Url::to(['todo/index', 'status' => 1]) . ' " class="btn btn-sm">Done</a>
+            </label>
+            <label>
+                <a href="' . Url::to(['todo/index', 'status' => 0]) . '" class="btn btn-sm ">Not Done</a>
+            </label>
+        </div>
+        </div>
+            
+        </div>
+        ',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -168,39 +187,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-    <label>
-        <a href="<?= Url::to(['todo/index',]) ?>" class="btn btn-sm">All</a>
-    </label>
-    <label>
-        <a href="<?= Url::to(['todo/index', 'status' => 1]) ?>" class="btn btn-sm">Done</a>
-    </label>
-    <label>
-        <a href="<?= Url::to(['todo/index', 'status' => 0]) ?>" class="btn btn-sm ">Not Done</a>
-    </label>
+
+
 
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
 <?php
 $script = <<<JS
     $("select[name='dateFilter']").change(function(){
         var value = $(this).val();
-<<<<<<< HEAD
-=======
-        // window.location.href += "?datetype="+value;
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
         var url = new URL(window.location.href);
         url.searchParams.set('datetype',value);
         window.location.href = url.href;
     });
-<<<<<<< HEAD
 JS;
 $this->registerJS($script);
-=======
-    
-JS;
-$this->registerJs($script);
->>>>>>> a66e2a50a6aafe9a733dd004cbfea63208814082
 ?>
