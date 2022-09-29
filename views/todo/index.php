@@ -24,36 +24,63 @@ use yii\widgets\Pjax;
 $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    @media (max-width: 575.98px) {
+        .card-body {
+            padding: .5rem;
+        }
 
+        h5.card-title {
+            font-size: .7rem;
+        }
+
+        select[name='dateFilter'] {
+            min-height: calc(1.5em + (.5rem + 2px));
+            padding: .25rem .5rem;
+            font-size: .6rem;
+            border-radius: .2rem;
+        }
+
+        h1.countingNumber {
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        #blankheight {
+            height: 24.4px;
+        }
+    }
+</style>
 <div class="todo-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="container">
         <div class="row my-5 body">
-            <div class="col-lg ">
+            <div class="col-lg col-6 ">
                 <div class="card border-success mt-2">
-                    <div class="card-body">
+                    <div class="card-body" id="countByDateType">
                         <h5 class="card-title ">Previous month tasks </h5>
                         <?= Html::dropDownList(
                             'dateFilter',
                             $datetype,
                             $drowdown,
-                            ['class' => 'form-control isSelect2']
+                            ['class' => 'form-control dateFilter']
                         )
                         ?>
-                        <h1><?= $countByDateType ?></h1>
+                        <h1 class="countingNumber"><?= $countByDateType ?></h1>
                     </div>
                 </div>
             </div>
-            <div class="col-lg">
+            <div class="col-lg col-6">
                 <div class="card border-danger mt-2">
-                    <div class="card-body">
+                    <div class="card-body" id="totalLastWeek">
                         <h5 class="card-title">Previous week tasks </h5>
-                        <h1><?= $totalLastWeek ?></h1>
+                        <div id="blankheight"></div>
+                        <h1 class="countingNumber"><?= $totalLastWeek ?></h1>
                     </div>
                 </div>
             </div>
-            <div class="col-lg">
+            <div class="col-lg col-4">
                 <div class="card border-secondary mt-2">
                     <div class="card-body">
                         <small class="float-end text-muted">Query task result</small>
@@ -64,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
-            <div class="col-lg">
+            <div class="col-lg col-4">
                 <div class="card border-primary mt-2">
                     <div class="card-body">
                         <small class="float-end text-muted">Query task result</small>
@@ -73,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-lg col-4">
                 <div class="card border-warning mt-2">
                     <div class="card-body">
                         <small class="float-end text-muted">Query task result</small>

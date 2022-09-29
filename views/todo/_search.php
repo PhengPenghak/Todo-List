@@ -7,6 +7,12 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var app\models\TodoSearch $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$searchTemplate = "{label}<div class='input-group mb-3'>
+                    {input}
+                    <button type='submit' class='input-group-text btn btn-dark'>Search</button>
+                    </div>";
+
 ?>
 
 <div class="todo-search">
@@ -19,19 +25,15 @@ use yii\helpers\Url;
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="input-group input-group-lg">
-                    <div style="width: 70%;">
-                        <p class="float-right">
-                            <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-outline-dark btn-sm btn-xs triggerModal ">Add Todo-List</button>
-                        </p>
-                    </div>
-                </div>
+                <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-outline-dark btn-sm btn-xs triggerModal ">Add Todo-List</button>
+
             </div>
             <div class="col col-lg-6">
-                <div class="input-group mb-3 ">
-                    <?= $form->field($model, 'globalSearch')->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control ', 'placeholder' => 'Search Todo.........',])->label(false) ?>
-                    <?= Html::submitButton('Search', ['class' => 'btn btn-dark']) ?>
-                </div>
+                <!-- <div class="input-group mb-3 "> -->
+                <?= $form->field($model, 'globalSearch', ['template' => $searchTemplate])->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control ', 'placeholder' => 'Search Todo.........',])->label(false) ?>
+                <?php // Html::submitButton('@', ['class' => 'btn btn-dark']) 
+                ?>
+                <!-- </div> -->
             </div>
 
 
