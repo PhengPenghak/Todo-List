@@ -69,19 +69,25 @@ class TodoSearch extends Todo
         }
         //exit;
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'title' => $this->title,
-            'status' => $this->status,
-            'create_at' => $this->create_at,
-            'date' => $this->date,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'title' => $this->title,
+        //     'status' => $this->status,
+        //     'create_at' => $this->create_at,
+        //     'date' => $this->date,
+        // ]);
 
         $query->orFilterWhere(['like', 'title', $this->globalSearch])
             ->orFilterWhere(['like', 'status', $this->globalSearch])
             ->orFilterWhere(['like', 'date', $this->globalSearch])
             ->orFilterWhere(['like', 'create_at', $this->globalSearch]);
 
+        // $query->andFilterWhere([
+        //     'OR',
+        //     ['like', 'id', $this->globalSearch],
+
+
+        // ]);
         return $dataProvider;
     }
 }
