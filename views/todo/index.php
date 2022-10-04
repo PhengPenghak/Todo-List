@@ -26,7 +26,11 @@ $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style>
+<<<<<<< HEAD
     @media (max-width:575.98px) {
+=======
+    @media (max-width: 575.98px) {
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
         .card-body {
             padding: .5rem;
         }
@@ -35,11 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
             font-size: .7rem;
         }
 
+<<<<<<< HEAD
         span.query_task {
 
             font-size: .7rem !important;
         }
 
+=======
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
         select[name='dateFilter'] {
             min-height: calc(1.5em + (.5rem + 2px));
             padding: .25rem .5rem;
@@ -52,6 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             margin-top: 5px;
         }
 
+<<<<<<< HEAD
         small.query_title {
             font-size: .5rem !important;
         }
@@ -108,6 +116,11 @@ $this->params['breadcrumbs'][] = $this->title;
         #w0>table>tbody>tr:nth-child(3)>td:nth-child(3)>a {
             font-size: smaller;
         }
+=======
+        #blankheight {
+            height: 24.4px;
+        }
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
     }
 </style>
 <div class="todo-index">
@@ -115,15 +128,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="container">
         <div class="row my-5 body">
+<<<<<<< HEAD
             <div class="col-lg col-6">
+=======
+            <div class="col-lg col-6 ">
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
                 <div class="card border-success mt-2">
-                    <div class="card-body">
+                    <div class="card-body" id="countByDateType">
                         <h5 class="card-title ">Previous month tasks </h5>
                         <?= Html::dropDownList(
                             'dateFilter',
                             $datetype,
                             $drowdown,
+<<<<<<< HEAD
                             ['class' => 'form-control isSelect2 dateFilter']
+=======
+                            ['class' => 'form-control dateFilter']
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
                         )
                         ?>
                         <h1 class="countingNumber"><?= $countByDateType ?></h1>
@@ -133,7 +154,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg col-6">
                 <div class="card border-danger mt-2">
                     <div class="card-body" id="totalLastWeek">
+<<<<<<< HEAD
                         <h5 class="card-title ">Previous week tasks </h5>
+=======
+                        <h5 class="card-title">Previous week tasks </h5>
+>>>>>>> b599b75e3a75ef024ff6054ac23deecdcbc4cf69
                         <div id="blankheight"></div>
                         <h1 class="countingNumber"><?= $totalLastWeek ?></h1>
                     </div>
