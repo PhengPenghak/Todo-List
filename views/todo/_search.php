@@ -9,10 +9,10 @@ use yii\helpers\Url;
 /** @var yii\widgets\ActiveForm $form */
 
 
-$searchTemplate = "{label}<div class='input-group mb-3 '>
+$searchTemplate = "{label}<div class='input-group mb-3 rounded-circle'>
                     {input}
-                    <button type='submit' class='input-group-text btn btn-dark btn_search '>Search</button>
-
+                    <button type='submit' class='input-group-text btn btn-dark btn_search '><i class='fas fa-search'></i></button>
+                   
                     </div>";
 
 ?>
@@ -27,10 +27,7 @@ $searchTemplate = "{label}<div class='input-group mb-3 '>
     <div class="container">
         <div class="row">
             <div class="col">
-
                 <button type="button" value="<?= Url::to(['todo/create']) ?>" class="btn btn-outline-dark btn-sm btn-xs triggerModal add_todo">Add Todo-List</button>
-
-
             </div>
             <div class="col col-lg-6">
                 <!-- <div class="input-group mb-3 "> -->
@@ -44,8 +41,6 @@ $searchTemplate = "{label}<div class='input-group mb-3 '>
             </div>
         </div>
     </div>
-
-
     <?php ActiveForm::end(); ?>
 </div>
 <?php
@@ -55,33 +50,10 @@ $script = <<<JS
         .modal("show")
         .find("#modalContent")
         .load($(this).attr("value"));   
-       
+        
     });
-    // $('#todosearch-globalsearch').keyup(delay(function (e) {
-    //     $('#formTodoSearch').trigger('submit');
-    // }, 500));
-    // var delay = (function(){
-    //     var timer = 0;
-    //     return function(callback, ms){
-    //         clearTimeout (timer);
-    //         timer = setTimeout(callback, ms);
-    //     };
-    //     })();
-    //     $('#todosearch-globalsearch').keyup(function() {
-    //         delay(function(){
-    //             $('#formTodoSearch').trigger('submit');
-    //         }, 1000 );
-    // });
-    // function delay(callback, ms) {
-    //     var timer = 0;
-    //     return function() {
-    //         var context = this, args = arguments;
-    //         clearTimeout(timer);
-    //         timer = setTimeout(function () {
-    //         callback.apply(context, args);
-    //         }, ms || 0);
-    //     };
-    // }
+    
+   
     // $(document).on("change","#todosearch-globalsearch", function(){
     //     $('#formTodoSearch').trigger('submit');
     // });
@@ -93,6 +65,7 @@ $script = <<<JS
             $('#formTodoSearch').trigger('submit');
         }, 500)
     });
+    
 JS;
 $this->registerJs($script);
 ?>

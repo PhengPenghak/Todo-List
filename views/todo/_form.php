@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group p-2">
         <?= Html::submitButton('Save', ['class' => 'btn btn-dark ']) ?>
+        <?= Html::a('Cancel', ['todo/cancel', 'id' => $model->id], ['class' => 'btn btn-warning ']) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>

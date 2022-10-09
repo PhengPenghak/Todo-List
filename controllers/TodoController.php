@@ -134,6 +134,10 @@ class TodoController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    public function actionCancel()
+    {
+        return $this->redirect("index");
+    }
 
     /**
      * Creates a new Todo model.
@@ -148,6 +152,7 @@ class TodoController extends Controller
         // $show = $request->get('show');
         // echo $show;
         // exit;
+
         if ($this->request->isPost) {
             if ($this->request->ispost && $model->load($this->request->post())) {
                 $model->create_at = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
@@ -193,8 +198,8 @@ class TodoController extends Controller
      */
     public function actionDelete($id)
     {
+        Yii::$app->session->setFlash('success', "Delete in Successfully");
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

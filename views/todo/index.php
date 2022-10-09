@@ -1,9 +1,7 @@
-<style>
-
-</style>
 <?php
 
 use app\models\Todo;
+use app\widgets\Alert;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\ButtonGroup;
 use yii\bootstrap5\LinkPager;
@@ -18,6 +16,8 @@ use kartik\select2\Select2;
 use yii\bootstrap5\ButtonDropdown;
 use yii\widgets\Pjax;
 
+
+
 /** @var yii\web\View $this */
 /** @var app\models\TodoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -25,100 +25,30 @@ use yii\widgets\Pjax;
 $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<style>
-    @media (max-width: 575.98px) {
-        .card-body {
-            padding: .5rem;
-        }
 
-        h5.card-title {
-            font-size: .7rem;
-        }
+<?php
+$session = Yii::$app->session;
 
-
-        span.query_task {
-
-            font-size: .7rem !important;
-        }
-
-
-        select[name='dateFilter'] {
-            min-height: calc(1.5em + (.5rem + 2px));
-            padding: .25rem .5rem;
-            font-size: .6rem;
-            border-radius: .2rem;
-        }
-
-        h1.countingNumber {
-            font-size: 1.2rem;
-            margin-top: 5px;
-        }
+if ($session->hasFlash('success')) {
+    echo \dominus77\sweetalert2\Alert::widget([
+        'options' => [
+            'title' => $session->getFlash('success'),
+            'icon' => 'success',
+            'toast' => true,
+            'position' => 'top-end',
+            'showConfirmButton' => false,
+            // 'animation' => true,
+            'customClass' => 'animated fadeInRight',
+            'padding' => 15,
+            'timer' => 3500,
+            //'type' => SweetAlert2Asset::TYPESUCCESS,
+        ]
+    ]);
+}
+?>
 
 
-        small.query_title {
-            font-size: .5rem !important;
-        }
-
-        #blankheight {
-            height: 24.4px;
-        }
-
-        .search_global {
-            font-size: .6rem;
-        }
-
-        .btn_search {
-            font-size: .6rem;
-            display: none;
-        }
-
-        .add_todo {
-            font-size: .6rem;
-        }
-
-        .size_icon {
-            display: grid;
-            width: 33px;
-            margin: 4px;
-        }
-
-        .title_size {
-            font-size: 8px;
-        }
-
-        .footer_size {
-            font-size: 12px;
-        }
-
-        #w1>ul>li.page-item>a {
-            font-size: .7rem;
-
-        }
-
-        #w0>table>thead {
-            font-size: .7rem;
-        }
-
-        #w0>table>tbody {
-            font-size: .7rem;
-            vertical-align: middle;
-        }
-
-        .summary {
-            display: none;
-        }
-
-        #w0>table>tbody>tr:nth-child(3)>td:nth-child(3)>a {
-            font-size: smaller;
-        }
-
-        #blankheight {
-            height: 24.4px;
-        }
-    }
-</style>
 <div class="todo-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="container">
         <div class="row my-5 body">
@@ -140,12 +70,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-lg col-6">
                 <div class="card border-danger mt-2">
                     <div class="card-body" id="totalLastWeek">
-
-
                         <h5 class="card-title">Previous week tasks </h5>
-
                         <div id="blankheight"></div>
+
                         <h1 class="countingNumber"><?= $totalLastWeek ?></h1>
+
                     </div>
                 </div>
             </div>
@@ -187,8 +116,9 @@ $this->params['breadcrumbs'][] = $this->title;
     Modal::begin([
         'id' => 'modal',
         'size' => 'modal-md',
+        'clientOptions' => ['backdrop' => 'static', 'keyboard' => false],
     ]);
-    echo "<div id='modalContent'></div>";
+    echo "<div id='modalContent' ></div>";
     Modal::end();
     ?>
     <?php echo $this->render('_search', ['model' => $searchModel]);
@@ -199,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'tableOptions' => [
-            'class' => 'table table-hover ',
+            'class' => 'table table-striped',
         ],
         'pager' => [
             // 'firstPageLabel' => 'First',
@@ -210,13 +140,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => '
         {items}
         <div class="row ">
-            <div class="col col-md-4">
+            <div class="col col-md-6">
                 {pager}
             </div>
-            <div class="col col-md-4">
-                {summary}
-            </div>
-            <div class="col col-md-4">
+            
+            <div class="col col-md-6">
             <div class="d-flex justify-content-end button ">
                 <label>
                     <a href="' . Url::to(['todo/index',]) . '" class="btn btn-sm footer_size">All</a>
@@ -245,9 +173,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function ($model) {
                     if ($model->status == 1) {
-                        return Html::a('Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-info btn-sm btn-xs title_size']);
+                        return Html::a('Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-info btn-sm btn-xs title_size button_size']);
                     } else {
-                        return Html::a('Not Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-warning btn-sm  btn-xs title_size']);
+                        return Html::a('Not Done', ['todo/changebtn', 'id' => $model->id, 'status' => $model->status], ['class' => 'btn btn-outline-warning btn-sm  btn-xs title_size button_size']);
                     }
                 }
             ],
@@ -264,18 +192,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
 
-
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => 'Action',
-                'template' => '{view} {update} {delete} {dropdown}',
-                'options' => ['class' => 'text-primary'],
+                'template' => '{view} {update} {delete} {dropdown} {offcanvas}',
+                'options' => ['class' => 'text-primary '],
                 'buttons' => [
 
                     'view' => function ($url, $model) {
                         $label = '<span class="d-none d-lg-inline-block">View &nbsp;</span>';
-                        return Html::a($label . '<i class="fas fa-eye"></i>', $url, ['class' => 'btn btn-outline-secondary btn-sm btn-xs size_icon d-none d-lg-inline-block']);
+                        return Html::a($label . '<i class="fas fa-eye"></i>', $url, ['class' => 'btn btn-outline-secondary btn-sm btn-xs size_icon d-none d-lg-inline-block btn-remove-item']);
                     },
 
                     'update' => function ($url, $model) {
@@ -286,31 +212,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]);
                     },
 
-                    'delete' => function ($url, $model) {
+                    'delete' => function ($url, $model,) {
                         $label = '<span class="d-none d-lg-inline-block">Delete &nbsp;</span>';
-                        return Html::a($label . ' <i class="fas fa-trash"></i>', $url, [
-                            'title' => Yii::t('app', 'Delete'),
-                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete?'),
-                            'data-method' => 'post', 'data-pjax' => '0',
-                            'class' => 'btn btn-outline-dark btn-sm btn-xs size_icon d-none d-lg-inline-block'
-                        ]);
+                        return '<button href="' . Url::to(['todo/delete', 'id' => $model->id]) . '" class="btn btn-outline-dark btn-sm btn-xs size_icon d-none d-lg-inline-block btn-remove-item">' . $label . '<i class="fas fa-eye"></i>' . '</button>';
+                        // return Html::a($label . ' <i class="fas fa-trash"></i>', $url, [
+                        //     'data-method' => 'post', 'data-pjax' => '0',
+                        //     'class' => 'btn btn-outline-dark btn-sm btn-xs size_icon d-none d-lg-inline-block btn-remove-item',
+                        // ]);
                     },
 
                     'dropdown' => function ($url, $model) {
 
                         $urlView = Url::toRoute(['todo/view', 'id' => $model->id]);
-                        $urlUpdate = Url::to(['todo/update', '1', 'id' => $model->id]);
+                        $urlUpdate = Url::to(['todo/update', 'id' => $model->id]);
                         $urlDelete = Url::toRoute(['todo/delete', 'id' => $model->id]);
-                        return "<div class='dropdown d-sm-none'>
+                        return "<div class='dropdown d-lg-none w-75%' >
                         <button class='btn btn-danger-sm dropdown-toggle ' type='button' id='dropdownMenuButton' data-bs-toggle='dropdown' aria-expanded='false'>
-                        
                         </button>
                         <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
                             <li><a class='dropdown-item title_size' data-pjax='0' href='{$urlView}'>View</a></li>
                             <li><a class='dropdown-item title_size triggerModal' data-pajx='0' value ='{$urlUpdate}',>Edit
-                                
                             </a></li>
-                            <li><a class='dropdown-item title_size'data-method = 'post' data-pjax='0' href='{$urlDelete}'>Delete</a></li>
+                            <li><a class='dropdown-item title_size btn-remove-item' href='{$urlDelete}'>Delete</a></li>
                         </ul>
                     </div>";
                     },
@@ -321,9 +244,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?php Pjax::end(); ?>
-
 </div>
+
 <?php
 $script = <<<JS
     $("select[name='dateFilter']").change(function(){
@@ -332,6 +254,33 @@ $script = <<<JS
         url.searchParams.set('datetype',value);
         window.location.href = url.href;
     });
+
+    // const swalWithBootstrapButtons = Swal.mixin({
+    // customClass: {
+    //     confirmButton: 'btn btn-success',
+    //     cancelButton: 'btn btn-danger'
+    // },
+    // buttonsStyling: false
+    // });
+    $('.btn-remove-item').click(function(e){
+        e.preventDefault();
+        var  href = $(this).attr('href');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                
+            if (result.isConfirmed) {    
+                $.post(href)
+            }
+            })      
+    });
+        
 JS;
 $this->registerJS($script);
 ?>

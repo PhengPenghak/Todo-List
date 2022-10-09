@@ -21,11 +21,14 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'https://code.jquery.com/jquery-3.6.1.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css',
         'css/site.css',
         'css/screen.css'
     ];
-    public $js = [];
+    public $js = [
+        '//cdn.jsdelivr.net/npm/sweetalert2@11',
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset'
