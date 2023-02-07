@@ -3,7 +3,10 @@
     /* tr:nth-child(1)>td:nth-child(5) {
         width: 230px;
     } */
-
+   
+    #w0 > table > tbody > tr:nth-child(1) > td:nth-child(5){
+        width: 273px;
+    }
     #totalLastWeek {
         height: 140px;
     }

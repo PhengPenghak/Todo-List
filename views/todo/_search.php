@@ -34,7 +34,6 @@ $searchTemplate = "{label}<div class='input-group mb-3 rounded-circle'>
 
                 <?= $form->field($model, 'globalSearch', ['template' => $searchTemplate])->textInput(['aria-label' => 'Search', 'type' => 'search', 'class' => 'form-control search_global', 'placeholder' => 'Search Todo.........',])->label(false) ?>
 
-
                 <?php // Html::submitButton('@', ['class' => 'btn btn-dark']) 
                 ?>
                 <!-- </div> -->
@@ -53,7 +52,6 @@ $script = <<<JS
         
     });
     
-   
     // $(document).on("change","#todosearch-globalsearch", function(){
     //     $('#formTodoSearch').trigger('submit');
     // });

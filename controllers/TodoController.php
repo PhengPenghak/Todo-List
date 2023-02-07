@@ -40,12 +40,11 @@ class TodoController extends Controller
      */
     public function actionIndex($show = 'all', $datetype = 'this_month')
     {
-
         $model = new Todo();
         $searchModel = new TodoSearch();
 
         $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->setPagination(['pageSize' => 5]);
+        $dataProvider->setPagination(['pageSize' => 4]);
 
         switch ($datetype) {
             case '$this_month':
@@ -130,7 +129,7 @@ class TodoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -146,16 +145,17 @@ class TodoController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Todo();
         $todo = Todo::find()->all();
         $request = Yii::$app->request;
         // $show = $request->get('show');
         // echo $show;
         // exit;
-
+        Yii::$app->session->setFlash('success', "Save Successfully");
         if ($this->request->isPost) {
             if ($this->request->ispost && $model->load($this->request->post())) {
-                $model->create_at = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
+                // $model->create_at = Yii::$app->formatter->asDatetime('now', 'php:Y-m-d H:i:s');
                 $model->status = 0;
                 $model->save();
                 return $this->redirect(['index']);
@@ -179,7 +179,7 @@ class TodoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        Yii::$app->session->setFlash('update', "update Successfully");
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
@@ -198,7 +198,7 @@ class TodoController extends Controller
      */
     public function actionDelete($id)
     {
-        Yii::$app->session->setFlash('success', "Delete in Successfully");
+        Yii::$app->session->setFlash('delete', "Delete in Successfully");
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }

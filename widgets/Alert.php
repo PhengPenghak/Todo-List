@@ -57,14 +57,14 @@ class Alert extends \yii\bootstrap5\Widget
             $flash = $session->getFlash($type);
 
             foreach ((array) $flash as $i => $message) {
-                echo \yii\bootstrap5\Alert::widget([
-                    'body' => $message,
-                    'closeButton' => $this->closeButton,
-                    'options' => array_merge($this->options, [
-                        'id' => $this->getId() . '-' . $type . '-' . $i,
-                        'class' => $this->alertTypes[$type] . $appendClass,
-                    ]),
-                ]);
+                // echo \yii\bootstrap5\Alert::widget([
+                //     'body' => $message,
+                //     'closeButton' => $this->closeButton,
+                //     'options' => array_merge($this->options, [
+                //         'id' => $this->getId() . '-' . $type . '-' . $i,
+                //         'class' => $this->alertTypes[$type] . $appendClass,
+                //     ]),
+                // ]);
             }
 
             $session->removeFlash($type);

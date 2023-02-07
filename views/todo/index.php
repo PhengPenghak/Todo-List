@@ -2,6 +2,7 @@
 
 use app\models\Todo;
 use app\widgets\Alert;
+use dominus77\sweetalert2\assets\SweetAlert2Asset;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\ButtonGroup;
 use yii\bootstrap5\LinkPager;
@@ -15,7 +16,7 @@ use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
 use yii\bootstrap5\ButtonDropdown;
 use yii\widgets\Pjax;
-
+use yii\base\Widget;
 
 
 /** @var yii\web\View $this */
@@ -25,29 +26,75 @@ use yii\widgets\Pjax;
 $this->title = 'Todos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php if (Yii::$app->session->hasFlash('success')) :
 
+    $session = Yii::$app->session;
+
+    if ($session->hasFlash('success')) {
+        echo \dominus77\sweetalert2\Alert::widget([
+            'options' => [
+                'title' => $session->getFlash('success'),
+                'icon' => 'success',
+                'toast' => true,
+                'position' => 'top-end',
+                'showConfirmButton' => false,
+                'animation' => true,
+                'customClass' => 'animated fadeInRight',
+                'padding' => 15,
+                'timer' => 1500,
+
+                //'type' => SweetAlert2Asset::TYPESUCCESS,
+            ]
+        ]);
+    }
+?>
+
+<?php endif; ?>
+<?php if (Yii::$app->session->hasFlash('update')) :
+
+    $session = Yii::$app->session;
+
+    if ($session->hasFlash('update')) {
+        echo \dominus77\sweetalert2\Alert::widget([
+            'options' => [
+                'title' => $session->getFlash('update'),
+                'icon' => 'success',
+                'toast' => true,
+                'position' => 'top-end',
+                'showConfirmButton' => false,
+                'animation' => true,
+                'customClass' => 'animated fadeInRight',
+                'padding' => 15,
+                'timer' => 1500,
+
+                //'type' => SweetAlert2Asset::TYPESUCCESS,
+            ]
+        ]);
+    }
+?>
+
+<?php endif; ?>
 <?php
 $session = Yii::$app->session;
 
-if ($session->hasFlash('success')) {
+if ($session->hasFlash('delete')) {
     echo \dominus77\sweetalert2\Alert::widget([
         'options' => [
-            'title' => $session->getFlash('success'),
+            'title' => $session->getFlash('delete'),
             'icon' => 'success',
             'toast' => true,
             'position' => 'top-end',
             'showConfirmButton' => false,
-            // 'animation' => true,
+            'animation' => true,
             'customClass' => 'animated fadeInRight',
             'padding' => 15,
-            'timer' => 3500,
+            'timer' => 1500,
+
             //'type' => SweetAlert2Asset::TYPESUCCESS,
         ]
     ]);
 }
 ?>
-
-
 <div class="todo-index">
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="container">
@@ -129,7 +176,7 @@ if ($session->hasFlash('success')) {
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'tableOptions' => [
-            'class' => 'table table-striped',
+            'class' => 'table table-hover',
         ],
         'pager' => [
             // 'firstPageLabel' => 'First',
@@ -179,12 +226,6 @@ if ($session->hasFlash('success')) {
                     }
                 }
             ],
-            // [
-            //     'attribute' => 'create_at',
-            //     'format' => 'datetime',
-            //     'contentOptions' => ['style' => 'white-space:nowrap'],
-
-            // ],
             [
                 'attribute' => 'date',
                 'format' => 'datetime',
@@ -201,7 +242,10 @@ if ($session->hasFlash('success')) {
 
                     'view' => function ($url, $model) {
                         $label = '<span class="d-none d-lg-inline-block">View &nbsp;</span>';
-                        return Html::a($label . '<i class="fas fa-eye"></i>', $url, ['class' => 'btn btn-outline-secondary btn-sm btn-xs size_icon d-none d-lg-inline-block btn-remove-item']);
+                        return Html::a($label . '<i class="fas fa-eye"></i>', "#", [
+                            'class' => 'btn btn-outline-secondary btn-sm btn-xs size_icon d-none d-lg-inline-block triggerModal',
+                            'value' => Url::to(['todo/view', 'id' => $model->id]),
+                        ]);
                     },
 
                     'update' => function ($url, $model) {
@@ -255,13 +299,6 @@ $script = <<<JS
         window.location.href = url.href;
     });
 
-    // const swalWithBootstrapButtons = Swal.mixin({
-    // customClass: {
-    //     confirmButton: 'btn btn-success',
-    //     cancelButton: 'btn btn-danger'
-    // },
-    // buttonsStyling: false
-    // });
     $('.btn-remove-item').click(function(e){
         e.preventDefault();
         var  href = $(this).attr('href');

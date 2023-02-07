@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'date')->widget(DateTimePicker::class, [
-        'options' => ['placeholder' => 'Enter event time ...'],
+        'options' => ['placeholder' => 'Start date & time'],
         'pluginOptions' => [
             'autoclose' => true
         ]
@@ -25,9 +25,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'placeholder' => 'Enter Todo.....']) ?>
 
     <div class="form-group p-2">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-dark ']) ?>
-        <?= Html::a('Cancel', ['todo/cancel', 'id' => $model->id], ['class' => 'btn btn-warning ']) ?>
-
+        <?= Html::submitButton('Save', ['class' => 'btn btn-dark ',]) ?>
+        <!-- <? Html::a('Cancel', ['todo/cancel', 'id' => $model->id], ['class' => 'btn btn-warning ']) ?> -->
     </div>
 
     <?php ActiveForm::end(); ?>
